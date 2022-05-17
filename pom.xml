@@ -17,9 +17,13 @@
 	
 	<properties>
 		<java.version>18</java.version>
+		<maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
 	</properties>
 	
 	<dependencies>
+
+		<!-- Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -42,14 +46,17 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		</dependency>
-		
+		<!-- JDBC Driver -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+		<!-- Code Generators -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <scope>provided</scope>
 		</dependency>
 
 	</dependencies>

@@ -2,27 +2,17 @@ package by.iba.onlineshop.database.criteria;
 
 import by.iba.onlineshop.entities.enums.Category;
 import by.iba.onlineshop.entities.enums.Subcategory;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Criteria {
 
+	@Getter
+	@Setter
 	private Category category;
 
+	@Getter
+	@Setter
 	private Subcategory subcategory;
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public Subcategory getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(Subcategory subcategory) {
-		this.subcategory = subcategory;
-	}
 
 }

@@ -17,13 +17,16 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 @Configuration
 public class ApplicationConfiguration {
 
+	@Autowired
+	private org.springframework.core.env.Environment environment;
+
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/online_shop");
-		dataSource.setUsername("root");
-		dataSource.setPassword("admin");
+		dataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
+		dataSource.setUrl(environment.getProperty("spring.datasource.url"));
+		dataSource.setUsername(environment.getProperty("spring.datasource.username"));
+		dataSource.setPassword(environment.getProperty("spring.datasource.password"));
 		return dataSource;
 	}
 
@@ -31,10 +34,10 @@ public class ApplicationConfiguration {
 	public SessionFactory sessionFactory(@Autowired DataSource dataSource) throws IOException {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		Properties properties = new Properties();
-		properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
-		properties.put(Environment.SHOW_SQL, "true");
+		properties.put(Environment.DIALECT, environment.getProperty("spring.jpa.properties.hibernate.dialect"));
+		properties.put(Environment.SHOW_SQL, environment.getProperty("spring.jpa.show-sql"));
 		properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS,
-				"org.springframework.orm.hibernate5.SpringSessionContext");
+				environment.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
 
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setPackagesToScan("by.iba.onlineshop.entities");

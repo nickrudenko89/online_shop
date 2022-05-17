@@ -11,96 +11,48 @@ import javax.persistence.Table;
 
 import by.iba.onlineshop.entities.enums.Category;
 import by.iba.onlineshop.entities.enums.Subcategory;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "products")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
 	private int id;
 
-	@Column(name = "category")
+	@Column
 	@Enumerated(EnumType.STRING)
+	@Getter
+	@Setter
 	private Category category;
 
-	@Column(name = "subcategory")
+	@Column
 	@Enumerated(EnumType.STRING)
+	@Getter
+	@Setter
 	private Subcategory subcategory;
 
-	@Column(name = "brand")
+	@Column
+	@Getter
+	@Setter
 	private String brand;
 
-	@Column(name = "model")
+	@Column
+	@Getter
+	@Setter
 	private String model;
 
-	@Column(name = "count")
+	@Column
+	@Getter
+	@Setter
 	private int count;
-
-	public Product() {
-	}
-
-	public Product(int id, Category category, Subcategory subcategory, String brand, String model, int count) {
-		this.id = id;
-		this.category = category;
-		this.subcategory = subcategory;
-		this.brand = brand;
-		this.model = model;
-		this.count = count;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public Subcategory getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(Subcategory subcategory) {
-		this.subcategory = subcategory;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", category=" + category + ", subcategory=" + subcategory + ", brand=" + brand
-				+ ", model=" + model + ", count=" + count + "]";
-	}
 
 }
