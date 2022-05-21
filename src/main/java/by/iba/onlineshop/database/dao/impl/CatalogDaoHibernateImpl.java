@@ -1,4 +1,4 @@
-package by.iba.onlineshop.database.dao;
+package by.iba.onlineshop.database.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import by.iba.onlineshop.database.criteria.Criteria;
+import by.iba.onlineshop.database.dao.CatalogDao;
 import by.iba.onlineshop.entities.Product;
 
 @Repository

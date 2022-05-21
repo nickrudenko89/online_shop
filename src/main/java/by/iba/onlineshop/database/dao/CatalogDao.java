@@ -8,18 +8,18 @@ import by.iba.onlineshop.entities.Product;
 
 public interface CatalogDao {
 
-	public List<Product> getProducts();
+	List<Product> getProducts();
 
-	public List<Product> getCategorizedProducts(Criteria criteria);
+	List<Product> getCategorizedProducts(Criteria criteria);
 
-	public Optional<Product> getExistingProduct(Product product);
+	Optional<Product> getExistingProduct(Product product);
 
-	public Product getProduct(int id);
+	Product getProduct(int id);
 
-	public Product createProduct(Product product);
+	Product createProduct(Product product);
 
-	public Product updateProduct(Product product);
+	Product updateProduct(Product product);
 
-	public void deleteProduct(Product product);
+	void deleteProduct(Product product);
 
 }
