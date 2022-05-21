@@ -3,6 +3,7 @@ package by.iba.onlineshop.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,18 +32,21 @@ public class ProductController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
+	@PreAuthorize("hasAuthority('MODIFY')")
 	public Product post(@RequestBody Product product) {
 		return productService.createProduct(product);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
+	@PreAuthorize("hasAuthority('MODIFY')")
 	public Product put(@RequestBody Product product) {
 		return productService.updateProduct(product);
 	}
 
 	@DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('MODIFY')")
 	public void delete(@RequestBody Product product) {
 		productService.deleteProduct(product);
 	}
