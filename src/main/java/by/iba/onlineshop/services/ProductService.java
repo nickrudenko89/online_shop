@@ -23,7 +23,7 @@ public class ProductService {
 	public Product createProduct(Product product) {
 		Optional<Product> existingProduct = catalogDao.getExistingProduct(product);
 		if (existingProduct.isPresent()) {
-			existingProduct.get().setCount(product.getCount() + existingProduct.get().getCount());
+			existingProduct.get().setAmount(product.getAmount() + existingProduct.get().getAmount());
 			return existingProduct.get();
 		} else {
 			return catalogDao.createProduct(product);

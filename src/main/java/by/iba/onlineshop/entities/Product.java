@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 import by.iba.onlineshop.entities.enums.Category;
 import by.iba.onlineshop.entities.enums.Subcategory;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,9 @@ public class Product {
 	private String model;
 
 	@Column
-	private int count;
+	private int amount;
+
+	@Column
+	private int price;
 
 }
