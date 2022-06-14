@@ -23,7 +23,7 @@ public class CatalogDaoHibernateImpl implements CatalogDao {
 	@Override
 	public List<Product> getProducts() {
 		Session session = sessionFactory.openSession();
-		List<Product> products = session.createQuery("From Product").list();
+		List<Product> products = session.createQuery("from Product").list();
 		session.close();
 		return products;
 	}

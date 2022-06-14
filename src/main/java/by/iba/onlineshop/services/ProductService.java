@@ -1,5 +1,6 @@
 package by.iba.onlineshop.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import by.iba.onlineshop.database.dao.CatalogDao;
+import by.iba.onlineshop.entities.Cart;
+import by.iba.onlineshop.entities.CartItem;
 import by.iba.onlineshop.entities.Product;
 
 @Service
@@ -21,10 +24,11 @@ public class ProductService {
 
 	@Transactional
 	public Product createProduct(Product product) {
-		Optional<Product> existingProduct = catalogDao.getExistingProduct(product);
-		if (existingProduct.isPresent()) {
-			existingProduct.get().setAmount(product.getAmount() + existingProduct.get().getAmount());
-			return existingProduct.get();
+		Optional<Product> optionalExistingProduct = catalogDao.getExistingProduct(product);
+		if (optionalExistingProduct.isPresent()) {
+			Product existingProduct = optionalExistingProduct.get();
+			existingProduct.setAmount(product.getAmount() + existingProduct.getAmount());
+			return existingProduct;
 		} else {
 			return catalogDao.createProduct(product);
 		}
@@ -37,7 +41,16 @@ public class ProductService {
 
 	@Transactional
 	public void deleteProduct(Product product) {
-		catalogDao.deleteProduct(product);
+		Product existingProduct = catalogDao.getExistingProduct(product).get();
+		List<CartItem> cartItems = existingProduct.getCartItems();
+
+		cartItems.forEach(cartItem -> {
+			Cart cart = cartItem.getCart();
+			cart.removeCartItem(cartItem);
+			cart.setTotalProductsAmount(cart.getTotalProductsAmount() - cartItem.getProductAmount());
+		});
+
+		catalogDao.deleteProduct(existingProduct);
 	}
 
 }
